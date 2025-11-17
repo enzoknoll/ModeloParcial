@@ -184,7 +184,7 @@ public class VehiculosRegistrados implements Metodos {
                     System.out.println("Vehículo agregado exitosamente.");
                     continue;
                 case 2:
-                    System.out.print("\n================================Lista de vehículos =====================================\n");
+                    System.out.print("\n================================ Lista de vehículos =====================================\n");
                     vehiculo1.mostrarVehiculos();
                     continue;
                 case 3:
