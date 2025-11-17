@@ -142,35 +142,46 @@ public class VehiculosRegistrados implements Metodos {
         }
     }
 
+    private static VehiculosRegistrados pedirDatosVehiculo(Scanner scanner) {
+        int anio = 0;
+        
+        while (true) {
+            try {
+                System.out.print("Ingrese año del vehiculo: ");
+                anio = Integer.parseInt(scanner.nextLine());
+                break;
+            } catch (NumberFormatException e) {
+                System.out.println("Error: Ingrese un año válido (solo números).");
+            }
+        }
+
+        System.out.print("Ingrese marca del vehiculo: ");
+        String marca = scanner.nextLine();
+
+        System.out.print("Ingrese modelo del vehiculo: ");
+        String modelo = scanner.nextLine();
+
+        System.out.print("Ingrese patente del vehiculo: ");
+        String patente = scanner.nextLine().toUpperCase();
+
+        return new VehiculosRegistrados(anio, marca, modelo, patente);
+    }
+
     public static void main(String[] args) {
         VehiculosRegistrados vehiculo1 = new VehiculosRegistrados(2020, "Toyota", "Corolla", "ABC123");
         VehiculosRegistrados vehiculo2 = new VehiculosRegistrados(2019, "Honda", "Civic", "DEF456");
         vehiculo1.agregarVehiculo(vehiculo1);
         vehiculo1.agregarVehiculo(vehiculo2);
         Scanner scanner = new Scanner(System.in);
-        int opcion;
         
         while (true) {
             Menu.mostrarMenu();
             System.out.print("Seleccione una opción del menú: ");
-            opcion = scanner.nextInt();
+            int opcion = Integer.parseInt(scanner.nextLine());
             try {
                 switch (opcion) {
                 case 1:
-                    System.out.print("Ingrese año del vehiculo: ");
-                    int anio = scanner.nextInt();
-                    scanner.nextLine(); // limpiar salto de línea
-
-                    System.out.print("Ingrese marca del vehiculo: ");
-                    String marca = scanner.nextLine();
-
-                    System.out.print("Ingrese modelo del vehiculo: ");
-                    String modelo = scanner.nextLine();
-
-                    System.out.print("Ingrese patente del vehiculo: ");
-                    String patente = scanner.nextLine().toUpperCase();
-
-                    VehiculosRegistrados nuevoVehiculo = new VehiculosRegistrados(anio, marca, modelo, patente);
+                    VehiculosRegistrados nuevoVehiculo = pedirDatosVehiculo(scanner);
                     vehiculo1.agregarVehiculo(nuevoVehiculo);
                     System.out.println("Vehículo agregado exitosamente.");
                     continue;
@@ -180,7 +191,7 @@ public class VehiculosRegistrados implements Metodos {
                     continue;
                 case 3:
                     System.out.print("Ingrese año para buscar: ");
-                    anio = scanner.nextInt();
+                    int anio = Integer.parseInt(scanner.nextLine());
                     vehiculo1.buscarVehiculosPorAnio(anio);
                     continue;
                 case 4:
@@ -189,29 +200,16 @@ public class VehiculosRegistrados implements Metodos {
                     continue;
                 case 5:
                     System.out.print("Ingrese la patente del vehiculo que quiere modificar: ");
-                    String patenteModificada = scanner.next().toUpperCase();
+                    String patenteModificada = scanner.nextLine().toUpperCase();
 
-                    System.out.print("Ingrese año del vehiculo: ");
-                    int anioModificado = scanner.nextInt();
-                    scanner.nextLine(); // limpiar salto de línea
-
-                    System.out.print("Ingrese marca del vehiculo: ");
-                    String marcaModificado = scanner.nextLine();
-
-                    System.out.print("Ingrese modelo del vehiculo: ");
-                    String modeloModificado = scanner.nextLine();
-
-                    System.out.print("Ingrese patente del vehiculo: ");
-                    String patenteModificado = patenteModificada;
-
-                    VehiculosRegistrados VehiculoModificado = new VehiculosRegistrados(anioModificado, marcaModificado, modeloModificado, patenteModificado);
+                    VehiculosRegistrados VehiculoModificado = pedirDatosVehiculo(scanner);
 
                     vehiculo1.actualizarVehiculoPorpatente(patenteModificada, VehiculoModificado);
                     vehiculo1.mostrarVehiculos();
                     continue;
                 case 6:
                     System.out.print("Ingrese patente del vehiculo a eliminar: ");
-                    vehiculo1.eliminarVehiculoPorpatente(scanner.next().toUpperCase());
+                    vehiculo1.eliminarVehiculoPorpatente(scanner.nextLine().toUpperCase());
                     vehiculo1.mostrarVehiculos();
                     continue;
                 case 7:
