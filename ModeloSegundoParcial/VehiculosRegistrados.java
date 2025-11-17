@@ -8,16 +8,14 @@ public class VehiculosRegistrados implements Metodos {
     private int anio;
     private String marca;
     private String modelo;
-    private String placa;
-    private int idPropietario;
+    private String patente;
     public ArrayList<VehiculosRegistrados> listaVehiculos = new ArrayList<>();
 
-    public VehiculosRegistrados(int anio, String marca, String modelo, String placa, int idPropietario) {
+    public VehiculosRegistrados(int anio, String marca, String modelo, String patente) {
         this.anio = anio;
         this.marca = marca;
         this.modelo = modelo;
-        this.placa = placa;
-        this.idPropietario = idPropietario;
+        this.patente = patente;
     }
 
     public int getAnio() {
@@ -29,20 +27,16 @@ public class VehiculosRegistrados implements Metodos {
     public String getModelo() {
         return modelo;
     }
-    public String getPlaca() {
-        return placa;
-    }
-    public int getIdPropietario() {
-        return idPropietario;
+    public String getpatente() {
+        return patente;
     }
 
     @Override
     public String toString() {
-        String linea = " Placa: " + getPlaca() +
+        String linea = " patente: " + getpatente() +
                    " | Año: " + getAnio() +
                    " | Marca: " + getMarca() +
-                   " | Modelo: " + getModelo() +
-                   " | ID Propietario: " + getIdPropietario() + " ";
+                   " | Modelo: " + getModelo();
 
         String borde = "═".repeat(linea.length());
 
@@ -56,12 +50,12 @@ public class VehiculosRegistrados implements Metodos {
         if (this == o) return true;
         if (!(o instanceof VehiculosRegistrados)) return false;
         VehiculosRegistrados that = (VehiculosRegistrados) o;
-        return Objects.equals(placa, that.placa);
+        return Objects.equals(patente, that.patente);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(placa);
+        return Objects.hash(patente);
     }
 
     @Override
@@ -75,17 +69,17 @@ public class VehiculosRegistrados implements Metodos {
         }
     }
     @Override
-    public void buscarVehiculoPorPlaca(String placa) {
+    public void buscarVehiculoPorpatente(String patente) {
         try {
             VehiculosRegistrados encontrado = listaVehiculos.stream()
-                    .filter(v -> v.getPlaca().equals(placa))
+                    .filter(v -> v.getpatente().equals(patente))
                     .findFirst()
                     .orElse(null);
 
             if (encontrado != null) {
                 System.out.println("Vehículo encontrado: " + encontrado);
             } else {
-                System.out.println("Vehículo con placa " + placa + " no encontrado.");
+                System.out.println("Vehículo con patente " + patente + " no encontrado.");
             }
 
         } catch (Exception e) {
@@ -113,44 +107,44 @@ public class VehiculosRegistrados implements Metodos {
     }  
 
     @Override
-    public void eliminarVehiculoPorPlaca(String placa) {
+    public void eliminarVehiculoPorpatente(String patente) {
         try {
             VehiculosRegistrados eliminado = listaVehiculos.stream()
-                    .filter(v -> v.getPlaca().equals(placa))
+                    .filter(v -> v.getpatente().equals(patente))
                     .findFirst()
                     .orElse(null);
             if (eliminado != null) {
                 listaVehiculos.remove(eliminado);
-                System.out.println("Vehículo con placa " + placa + " eliminado.");
+                System.out.println("Vehículo con patente " + patente + " eliminado.");
                 return;
             }
-            System.out.println("Vehículo con placa " + placa + " no encontrado.");
+            System.out.println("Vehículo con patente " + patente + " no encontrado.");
         } catch (Exception e) {
             System.out.println("Ocurrió un error al eliminar el vehículo: " + e.getMessage());
         }
     }
     @Override
-    public void actualizarVehiculoPorPlaca(String placa, VehiculosRegistrados nuevoVehiculo) {
+    public void actualizarVehiculoPorpatente(String patente, VehiculosRegistrados nuevoVehiculo) {
         try {
             VehiculosRegistrados actualizable = listaVehiculos.stream()
-                    .filter(v -> v.getPlaca().equals(placa))
+                    .filter(v -> v.getpatente().equals(patente))
                     .findFirst()
                     .orElse(null);
             if (actualizable != null) {
                 int indice = listaVehiculos.indexOf(actualizable);
                 listaVehiculos.set(indice, nuevoVehiculo);
-                System.out.println("Vehículo con placa " + placa + " actualizado.");
+                System.out.println("Vehículo con patente " + patente + " actualizado.");
                 return;
             }
-            System.out.println("Vehículo con placa " + placa + " no encontrado.");
+            System.out.println("Vehículo con patente " + patente + " no encontrado.");
         } catch (Exception e) {
             System.out.println("Ocurrió un error al actualizar el vehículo: " + e.getMessage());
         }
     }
 
     public static void main(String[] args) {
-        VehiculosRegistrados vehiculo1 = new VehiculosRegistrados(2020, "Toyota", "Corolla", "ABC123", 1);
-        VehiculosRegistrados vehiculo2 = new VehiculosRegistrados(2019, "Honda", "Civic", "DEF456", 2);
+        VehiculosRegistrados vehiculo1 = new VehiculosRegistrados(2020, "Toyota", "Corolla", "ABC123");
+        VehiculosRegistrados vehiculo2 = new VehiculosRegistrados(2019, "Honda", "Civic", "DEF456");
         vehiculo1.agregarVehiculo(vehiculo1);
         vehiculo1.agregarVehiculo(vehiculo2);
         Scanner scanner = new Scanner(System.in);
@@ -173,13 +167,10 @@ public class VehiculosRegistrados implements Metodos {
                     System.out.print("Ingrese modelo del vehiculo: ");
                     String modelo = scanner.nextLine();
 
-                    System.out.print("Ingrese placa del vehiculo: ");
-                    String placa = scanner.nextLine().toUpperCase();
+                    System.out.print("Ingrese patente del vehiculo: ");
+                    String patente = scanner.nextLine().toUpperCase();
 
-                    System.out.print("Ingrese ID del propietario: ");
-                    int idPropietario = scanner.nextInt();
-
-                    VehiculosRegistrados nuevoVehiculo = new VehiculosRegistrados(anio, marca, modelo, placa, idPropietario);
+                    VehiculosRegistrados nuevoVehiculo = new VehiculosRegistrados(anio, marca, modelo, patente);
                     vehiculo1.agregarVehiculo(nuevoVehiculo);
                     System.out.println("Vehículo agregado exitosamente.");
                     continue;
@@ -193,12 +184,12 @@ public class VehiculosRegistrados implements Metodos {
                     vehiculo1.buscarVehiculosPorAnio(anio);
                     continue;
                 case 4:
-                    System.out.print("Ingrese placa para buscar: ");
-                    vehiculo1.buscarVehiculoPorPlaca(scanner.next().toUpperCase());
+                    System.out.print("Ingrese patente para buscar: ");
+                    vehiculo1.buscarVehiculoPorpatente(scanner.next().toUpperCase());
                     continue;
                 case 5:
-                    System.out.print("Ingrese la placa del vehiculo que quiere modificar: ");
-                    String placaModificada = scanner.next().toUpperCase();
+                    System.out.print("Ingrese la patente del vehiculo que quiere modificar: ");
+                    String patenteModificada = scanner.next().toUpperCase();
 
                     System.out.print("Ingrese año del vehiculo: ");
                     int anioModificado = scanner.nextInt();
@@ -210,20 +201,17 @@ public class VehiculosRegistrados implements Metodos {
                     System.out.print("Ingrese modelo del vehiculo: ");
                     String modeloModificado = scanner.nextLine();
 
-                    System.out.print("Ingrese placa del vehiculo: ");
-                    String placaModificado = placaModificada;
+                    System.out.print("Ingrese patente del vehiculo: ");
+                    String patenteModificado = patenteModificada;
 
-                    System.out.print("Ingrese ID del propietario: ");
-                    int idPropietarioModificado = scanner.nextInt();
+                    VehiculosRegistrados VehiculoModificado = new VehiculosRegistrados(anioModificado, marcaModificado, modeloModificado, patenteModificado);
 
-                    VehiculosRegistrados VehiculoModificado = new VehiculosRegistrados(anioModificado, marcaModificado, modeloModificado, placaModificado, idPropietarioModificado);
-
-                    vehiculo1.actualizarVehiculoPorPlaca(placaModificada, VehiculoModificado);
+                    vehiculo1.actualizarVehiculoPorpatente(patenteModificada, VehiculoModificado);
                     vehiculo1.mostrarVehiculos();
                     continue;
                 case 6:
-                    System.out.print("Ingrese placa del vehiculo a eliminar: ");
-                    vehiculo1.eliminarVehiculoPorPlaca(scanner.next().toUpperCase());
+                    System.out.print("Ingrese patente del vehiculo a eliminar: ");
+                    vehiculo1.eliminarVehiculoPorpatente(scanner.next().toUpperCase());
                     vehiculo1.mostrarVehiculos();
                     continue;
                 case 7:

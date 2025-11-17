@@ -3,8 +3,8 @@ package ModeloSegundoParcial;
 public interface Metodos {
     void agregarVehiculo(VehiculosRegistrados vehiculo);
     void mostrarVehiculos();
-    void buscarVehiculoPorPlaca(String placa);
+    void buscarVehiculoPorpatente(String patente);
     void buscarVehiculosPorAnio(int anio);
-    void eliminarVehiculoPorPlaca(String placa);
-    void actualizarVehiculoPorPlaca(String placa, VehiculosRegistrados nuevoVehiculo);
+    void eliminarVehiculoPorpatente(String patente);
+    void actualizarVehiculoPorpatente(String patente, VehiculosRegistrados nuevoVehiculo);
 }
