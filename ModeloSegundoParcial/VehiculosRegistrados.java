@@ -1,6 +1,5 @@
 package ModeloSegundoParcial;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
