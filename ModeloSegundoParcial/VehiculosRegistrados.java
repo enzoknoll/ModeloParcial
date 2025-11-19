@@ -1,5 +1,6 @@
 package ModeloSegundoParcial;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
@@ -30,6 +31,9 @@ public class VehiculosRegistrados implements Metodos {
     public String getpatente() {
         return patente;
     }
+    //public ArrayList<VehiculosRegistrados> getListaVehiculos() {
+    //    return listaVehiculos;
+    //}
 
     @Override
     public String toString() {
@@ -173,7 +177,7 @@ public class VehiculosRegistrados implements Metodos {
         vehiculo1.agregarVehiculo(vehiculo1);
         vehiculo1.agregarVehiculo(vehiculo2);
         Scanner scanner = new Scanner(System.in);
-        
+
         while (true) {
             Menu.mostrarMenu();
             System.out.print("Seleccione una opción del menú: ");
